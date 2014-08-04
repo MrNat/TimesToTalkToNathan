@@ -31,10 +31,6 @@
 		// CSS width & height
 		canvas.style.width = window.innerWidth;
 		canvas.style.height = window.innerHeight;
-		var rectangle = {
-    	width: devicePixelRatio * window.innerWidth / 10,
-    	height: devicePixelRatio * window.innerHeight / 10
-		};
 
 		$(window).orientationchange();
 	});
@@ -51,10 +47,6 @@
 		// CSS width & height
 		canvas.style.width = window.innerWidth;
 		canvas.style.height = window.innerHeight;
-		var rectangle = {
-    	width: devicePixelRatio * window.innerWidth / 10,
-    	height: devicePixelRatio * window.innerHeight / 10
-		};
 		if (event.orientation == "portrait")
 		{
 			// Portrait mode //
@@ -193,7 +185,7 @@
     	//var hour = 16;
     	var hourVert = header + ((hour - 8) * tileHeight);
     	//var hourVert = 200;
-    	context.fillText(window.innerWidth, 150, 100);
+    	context.fillText(window.devicePixelRatio, 150, 100);
     	context.beginPath();
     	context.strokeStyle = "#FF0000";
     	context.lineWidth = 4;
