@@ -1,8 +1,5 @@
-@media screen and (max-width: 600px) {
+@media screen and (orientation: landscape) {
 
-	@viewport {
-		width: 640px;
-	}
 
 	.red {
 		font-size: x-large;
