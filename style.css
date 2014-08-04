@@ -1,7 +1,15 @@
-@media screen and (orientation: landscape) {
+/* Smartphones, (portrait and landscape) */
 
+html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            border: 0;
+            /*overflow: hidden; /*  Disable scrollbars */
+            display: block;  /* No floating content on sides */
+        }
 
-	.red {
+	.title {
 		font-size: x-large;
 		font-family: Helvetica, Arial, sans-serif;
 		color: #030310;
@@ -51,20 +59,24 @@
 		color: #919191;
 	}
 
+	#wrap {
+		width: 100%;
+
+	}
 
 	#columns {
 		float: right;
-		position: absolute;
+		position: relative;
+
+		background-color: #EAEAEA;
 
 		margin: 10px;
 		padding: 0px;
 
-		-webkit-column-count: 2; /* Chrome, Safari, Opera */
-    	-moz-column-count: 2;
-		column-count: 2;
-		column-rule: 1em solid black;
-		column-width: 10px;
+		height: 100px;
 	}
-}
+
+	
+
 
 
