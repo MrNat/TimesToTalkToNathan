@@ -108,13 +108,13 @@
       	}
 
       	// Horizontal lines //
-    	context.lineWidth = 0.25;
-    	context.strokeStyle = "#000000";
+    	context.lineWidth = 1;
+    	context.strokeStyle = "#203302";
     	for (l = 0; l < 12; l++)
     	{
     		context.beginPath();
-    		context.moveTo(40, header + tileHeight * l);
-    		context.lineTo(window.innerWidth - 5, header + tileHeight * l);
+    		context.moveTo(40, header + Math.floor(tileHeight) * l + 0.5);
+    		context.lineTo(window.innerWidth - 5, header + Math.floor(tileHeight) * l + 0.5);
     		context.stroke();
     	}
 
