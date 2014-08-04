@@ -50,11 +50,9 @@
 		var c = document.getElementById("schedule");
 		var context = c.getContext("2d");
 
-		if (orient == 0)
-		{
-			context.fillStyle = "#E3E3E3";
-			context.fillRect(0, 0, window.innerWidth, window.innerHeight);
-		}
+		context.fillStyle = "#ECEBB9";
+		context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+		
 
 		// Title //
 		context.font = "24pt Helvetica";
@@ -66,15 +64,13 @@
       	var header = 50;
       	var tileHeight = (window.innerHeight - header - 15) / 11;
 
-      	context.fillStyle = '#919191';
+      	context.fillStyle = '#72818B';
       	context.fillRect(5, header, 30, window.innerHeight - header - 15);
-      	context.fillStyle = "#545454";
-      	context.fillRect(5, header, 30, tileHeight);
-      	context.fillRect(5, header+tileHeight*2, 30, tileHeight);
-      	context.fillRect(5, header+tileHeight*4, 30, tileHeight);
-      	context.fillRect(5, header+tileHeight*6, 30, tileHeight);
-      	context.fillRect(5, header+tileHeight*8, 30, tileHeight);
-      	context.fillRect(5, header+tileHeight*10, 30, tileHeight);
+      	context.fillStyle = "#454857";
+      	for (y = 0; y < 11; y+=2)
+      	{
+      		context.fillRect(5, header + tileHeight*y, 30, tileHeight);
+      	}
 
 		context.beginPath();
 		context.rect(5, header, 30, window.innerHeight - header - 15);
@@ -84,13 +80,31 @@
 
       	context.font = "12pt Calibri";
       	context.textAlign = "center";
-      	context.fillStyle = "#FFFFFF";
+      	context.fillStyle = "#BEE2E7";
       	for (t = 0; t < 11; t++)
       	{
       		if (t < 5)
       			context.fillText(8+t, 20, header + tileHeight*t + 6 + (tileHeight / 2));
       		else
       			context.fillText(8+t-12, 20, header + tileHeight*t + 6 + (tileHeight / 2));
+      	}
+
+      	// Vertical Dividers //
+      	if (orient == 0) // Portrait //
+      	{
+      		var colWidth = (window.innerWidth - 10 - 30 - 10) / 2;
+      		context.fillStyle = "#DAD8A7";
+      		context.fillRect(37.5, header, colWidth+5, window.innerHeight - header - 5);
+      		
+      	}
+      	else // Landscape //
+      	{
+			var colWidth = (window.innerWidth - 10 - 30 - 10) / 5;
+      		for (v = 0; v < 5; v+=2)
+      		{
+      			context.fillStyle = "#DAD8A7";
+      			context.fillRect(37.5 + (colWidth*v) + (5*v), header, colWidth+5, window.innerHeight - header - 5);
+      		}
       	}
 
       	// Horizontal lines //
@@ -105,15 +119,15 @@
     	}
 
     	// Draw schedule boxes //
-    	var classes = [["#FF0000", "#00FF00"],
-    				   ["#0000FF", "#0F0F00"],
-    				   ["#574389", "#120933"],
-    				   ["#234794", "#275929", "#016663"],
-    				   ["#234721", "#194692"]];
+    	var classes = [["#3FB8AF", "#7FC7AF"],
+    				   ["#FF3D7F", "#FF9E9D"],
+    				   ["#7FC7AF", "#3FB8AF"],
+    				   ["#FF9E9D", "#FF3D7F", "#FF9E9D"],
+    				   ["#3FB8AF", "#7FC7AF"]];
     	var times   = [[[10.5, 2],[12.5, 2]],
     				   [[10.5, 1],[16.5,2]],
     				   [[8.5, 2], [11.5, 1]],
-    				   [[8.5, 2], [12.5, 2], [2.5, 1]],
+    				   [[8.5, 2], [12.5, 2], [14.5, 1]],
     				   [[9.5, 2], [16.5, 2]]];
     	//var day = initDate()-1;
     	
