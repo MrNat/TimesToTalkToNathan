@@ -3,17 +3,35 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=100, initial-scale=1.0, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Times to Talk to Nathan</title>
-	<link rel="stylesheet" type="text/css" media="screen and (min-width: 600px)" href="style.css" />
-	<link rel="stylesheet" type="text/css" media="screen and (max-width: 600px)" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="style-small.css" />
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+	
 </head>
 
-<body>
+<body onload="drawSchedule()">
+	
+	<script>
+	function drawSchedule()
+	{
+		var date = new Date();
+		var day = date.getDate();
+		//document.getElementById("demo").innerHTML = day;
+	}
+	</script>
+	<script>
+	$(window).on("orientationchange", function(event) {
+		$("#orientation").text("This device is in "+event.orientation);
+	});
+	</script>
 
 	<div align="center">
-		<span class="red">Times to Talk to Nathan</span>
+		<span class="red" id="orientation">Times to Talk to Nathan</span>
 	</div>
 
 	<aside class="timeRuler">
@@ -30,9 +48,12 @@
 			<li class="darker">4</li>
 			<li>5</li>
 			<li class="darker">6</li>
-
 		</ul>
 	</aside>
+
+	<content id="columns">
+		<div class="box"></div>
+	</content>
 </body>
 
 </html>
