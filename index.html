@@ -18,7 +18,8 @@
 	<script>
 	$(document).ready(function() {
 		initDate();
-		$(window).orientationchange();
+		$(window).resize();
+		redrawLayout();
 	});
 
 	function initDate()
@@ -34,6 +35,14 @@
 
 		
 	}
+
+	$(window).on("resize", function(event) {
+		var c = document.getElementById("schedule");
+		c.height = window.innerHeight;
+		c.width = window.innerWidth;
+
+		redrawLayout();
+	});
 
 	$(window).on("orientationchange", function(event) {
 		$("#orientation").text("This device is in "+event.orientation);
@@ -52,6 +61,17 @@
 			context.fillRect(0, 0, window.innerWidth, window.innerHeight);
 		}
 	});
+
+	function redrawLayout()
+	{
+		$(window).orientationchange();
+
+		var c = document.getElementById("schedule");
+		var context = c.getContext("2d");
+
+		context.fillStyle = "#000000";
+		context.fillRect(0, 10, 30, window.innerHeight - 50);
+	}
 	</script>
 
 	<canvas id="schedule" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%"></canvas>
