@@ -105,7 +105,7 @@
     	context.lineWidth = 0.25;
     	context.strokeStyle = "#000000";
     	context.moveTo(40, 25); context.lineTo(window.innerWidth - 5, 25); context.stroke();
-    	context.moveTo(40, 25 + tileHeight); context.lineTo(window.innerWidth - 5, 25 + tileHeight); context.stroke();
+    	context.moveTo(40, 25.0 + tileHeight); context.lineTo(window.innerWidth - 5, 25 + tileHeight); context.stroke();
     	context.moveTo(40, 25 + tileHeight*2); context.lineTo(window.innerWidth - 5, 25 + tileHeight*2); context.stroke();
     	context.moveTo(40, 25 + tileHeight*3); context.lineTo(window.innerWidth - 5, 25 + tileHeight*3); context.stroke();
     	context.moveTo(40, 25 + tileHeight*4); context.lineTo(window.innerWidth - 5, 25 + tileHeight*4); context.stroke();
@@ -122,6 +122,12 @@
     	{
     		var boxWidth = (window.innerWidth - 10 - 30 - 10) / 2;
     		context.fillStyle = "#FF0000";
+    		context.fillRect(40, 25, boxWidth, tileHeight*6);
+    	}
+    	else // Landscape //
+    	{
+    		var boxWidth = (window.innerWidth - 10 - 30 - 10) / 5;
+    		context.fillStyle = "#0000FF";
     		context.fillRect(40, 25, boxWidth, tileHeight*6);
     	}
 	}
