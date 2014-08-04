@@ -41,8 +41,20 @@
 
 	$(window).on("orientationchange", function(event) {
 		//$("#orientation").text("This device is in "+event.orientation);
-		var c = document.getElementById("main");
-		
+		//var c = document.getElementById("main");
+		var devicePixelRatio = window.devicePixelRatio || 1; // > 1 for retina displays
+		var canvas = document.getElementById('main');
+		/* Be sure to update all these values onresize */
+		// Width & height attributes (scaled according to pixel ratio)
+		canvas.width = window.innerWidth * devicePixelRatio;
+		canvas.height = window.innerHeight * devicePixelRatio;
+		// CSS width & height
+		canvas.style.width = window.innerWidth;
+		canvas.style.height = window.innerHeight;
+		var rectangle = {
+    	width: devicePixelRatio * window.innerWidth / 10,
+    	height: devicePixelRatio * window.innerHeight / 10
+		};
 		if (event.orientation == "portrait")
 		{
 			// Portrait mode //
