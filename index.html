@@ -19,7 +19,7 @@
 	$(document).ready(function() {
 		initDate();
 		$(window).resize();
-		redrawLayout();
+		$(window).orientationchange();
 	});
 
 	function initDate()
@@ -31,9 +31,6 @@
 		var col = "#day" + day;
 		//alert(col);
 		$(col).hide();
-
-
-		
 	}
 
 	$(window).on("resize", function(event) {
@@ -41,36 +38,92 @@
 		c.height = window.innerHeight;
 		c.width = window.innerWidth;
 
-		redrawLayout();
+		$(window).orientationchange();
 	});
 
 	$(window).on("orientationchange", function(event) {
 		$("#orientation").text("This device is in "+event.orientation);
-		var c = document.getElementById("schedule");
-		var context = c.getContext("2d");
 		if (event.orientation == "portrait")
 		{
 			// Portrait mode //
-			context.fillStyle = "#FF0000";
-			context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+			redrawLayout(0);
 		}
 		else
 		{
 			// Landscape mode //
-			context.fillStyle = "#0000FF";
-			context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+			redrawLayout(1);
 		}
+
 	});
 
-	function redrawLayout()
+	function redrawLayout(orient)
 	{
-		$(window).orientationchange();
-
 		var c = document.getElementById("schedule");
 		var context = c.getContext("2d");
 
-		context.fillStyle = "#000000";
-		context.fillRect(0, 10, 30, window.innerHeight - 50);
+		if (orient == 0)
+		{
+			context.fillStyle = "#E3E3E3";
+			context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+		}
+
+		// Draw sidebar time //
+      	var tileHeight = (window.innerHeight - 25 - 15) / 11;
+
+      	context.fillStyle = '#919191';
+      	context.fillRect(5, 25, 30, window.innerHeight - 25 - 15);
+      	context.fillStyle = "#545454";
+      	context.fillRect(5, 25, 30, tileHeight);
+      	context.fillRect(5, 25+tileHeight*2, 30, tileHeight);
+      	context.fillRect(5, 25+tileHeight*4, 30, tileHeight);
+      	context.fillRect(5, 25+tileHeight*6, 30, tileHeight);
+      	context.fillRect(5, 25+tileHeight*8, 30, tileHeight);
+      	context.fillRect(5, 25+tileHeight*10, 30, tileHeight);
+
+		context.beginPath();
+		context.rect(5, 25, 30, window.innerHeight - 25 - 15);
+      	context.lineWidth = 2;
+      	context.strokeStyle = 'black';
+      	context.stroke();
+
+      	context.font = "12pt Calibri";
+      	context.textAlign = "center";
+      	context.fillStyle = "#FFFFFF";
+      	context.fillText("8", 20, 25 + 6 + (tileHeight / 2));
+      	context.fillText("9", 20, 25 + tileHeight + 6 + (tileHeight / 2));
+      	context.fillText("10", 20, 25 + tileHeight*2 + 6 + (tileHeight / 2));
+      	context.fillText("11", 20, 25 + tileHeight*3 + 6 + (tileHeight / 2));
+      	context.fillText("12", 20, 25 + tileHeight*4 + 6 + (tileHeight / 2));
+      	context.fillText("1", 20, 25 + tileHeight*5 + 6 + (tileHeight / 2));
+      	context.fillText("2", 20, 25 + tileHeight*6 + 6 + (tileHeight / 2));
+      	context.fillText("3", 20, 25 + tileHeight*7 + 6 + (tileHeight / 2));
+      	context.fillText("4", 20, 25 + tileHeight*8 + 6 + (tileHeight / 2));
+      	context.fillText("5", 20, 25 + tileHeight*9 + 6 + (tileHeight / 2));
+      	context.fillText("6", 20, 25 + tileHeight*10 + 6 + (tileHeight / 2));
+
+      	// Horizontal lines //
+    	context.lineWidth = 0.25;
+    	context.strokeStyle = "#000000";
+    	context.moveTo(40, 25); context.lineTo(window.innerWidth - 5, 25); context.stroke();
+    	context.moveTo(40, 25 + tileHeight); context.lineTo(window.innerWidth - 5, 25 + tileHeight); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*2); context.lineTo(window.innerWidth - 5, 25 + tileHeight*2); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*3); context.lineTo(window.innerWidth - 5, 25 + tileHeight*3); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*4); context.lineTo(window.innerWidth - 5, 25 + tileHeight*4); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*5); context.lineTo(window.innerWidth - 5, 25 + tileHeight*5); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*6); context.lineTo(window.innerWidth - 5, 25 + tileHeight*6); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*7); context.lineTo(window.innerWidth - 5, 25 + tileHeight*7); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*8); context.lineTo(window.innerWidth - 5, 25 + tileHeight*8); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*9); context.lineTo(window.innerWidth - 5, 25 + tileHeight*9); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*10); context.lineTo(window.innerWidth - 5, 25 + tileHeight*10); context.stroke();
+    	context.moveTo(40, 25 + tileHeight*11); context.lineTo(window.innerWidth - 5, 25 + tileHeight*11); context.stroke();
+
+    	// Draw schedule boxes //
+    	if (orient == 0) // Portrait //
+    	{
+    		var boxWidth = (window.innerWidth - 10 - 30 - 10) / 2;
+    		context.fillStyle = "#FF0000";
+    		context.fillRect(40, 25, boxWidth, tileHeight*6);
+    	}
 	}
 	</script>
 
