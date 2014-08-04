@@ -18,10 +18,9 @@ html, body {
     margin: auto;
         }
 	
-	@viewport {
-    width: 980px;
-    min-zoom: 0.25;
-    max-zoom: 5;
+@viewport {
+    width: device-width;
+    height: device-height;
     orientation: landscape;
 }
 
