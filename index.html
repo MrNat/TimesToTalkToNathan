@@ -8,33 +8,57 @@
 	<title>Times to Talk to Nathan</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
 	
 </head>
 
-<body onload="drawSchedule()">
-	
+<body>
 	<script>
-	function drawSchedule()
+	$(document).ready(function() {
+		initDate();
+		$(window).orientationchange();
+	});
+
+	function initDate()
 	{
-		var date = new Date();
-		var day = date.getDate();
-		//document.getElementById("demo").innerHTML = day;
+		var currentDate = new Date();
+		var month = currentDate.getMonth() + 1;
+		var day = currentDate.getDay(); // 0=SUN, 1=MON,...
+
+		var col = "#day" + day;
+		//alert(col);
+		$(col).hide();
+
+
+		
 	}
-	</script>
-	<script>
+
 	$(window).on("orientationchange", function(event) {
 		$("#orientation").text("This device is in "+event.orientation);
+		var c = document.getElementById("schedule");
+		var context = c.getContext("2d");
+		if (event.orientation == "portrait")
+		{
+			// Portrait mode //
+			context.fillStyle = "#FF0000";
+			context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+		}
+		else
+		{
+			// Landscape mode //
+			context.fillStyle = "#0000FF";
+			context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+		}
 	});
 	</script>
 
-	<div align="center">
-		<span class="red" id="orientation">Times to Talk to Nathan</span>
-	</div>
+	<canvas id="schedule" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%"></canvas>
 
-	<aside class="timeRuler">
+	<!--
+	<div id="wrap">
+	<aside class="timeRuler" id="time">
 		<ul>
 			<li>7</li>
 			<li class="darker">8</li>
@@ -51,9 +75,12 @@
 		</ul>
 	</aside>
 
-	<content id="columns">
-		<div class="box"></div>
-	</content>
+	<div id="columns">
+		<div class="col">1</div>
+		<div class="col">2</div>
+	</div>
+	</div>
+	-->
 </body>
 
 </html>
