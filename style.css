@@ -19,9 +19,8 @@ html, body {
         }
 	
 @viewport {
-    width: device-width;
-    height: device-height;
-    orientation: landscape;
+	width: device-width;
+	zoom: 1;
 }
 
 
