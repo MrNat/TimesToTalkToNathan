@@ -1,9 +1,6 @@
 /* Smartphones, (portrait and landscape) */
-@media screen
-{
+
 html, body {
-            width: 100%;
-            height: 100%;
             margin: 0px;
             border: 0;
             overflow: hidden; 
@@ -18,10 +15,3 @@ html, body {
     bottom: 0;
     margin: auto;
         }
-	
-@viewport {
-	width: device-width;
-	zoom: 1;
-}
-
-}
