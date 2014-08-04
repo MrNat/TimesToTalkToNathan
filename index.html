@@ -22,8 +22,8 @@
 
 	$(window).on("resize", function(event) {
 		var canvas = document.getElementById("main");
-		canvas.width = window.outerWidth;
-		canvas.height = window.outerHeight;
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
 		$(window).orientationchange();
 	});
 
