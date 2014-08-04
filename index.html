@@ -21,36 +21,17 @@
 	});
 
 	$(window).on("resize", function(event) {
-
-		var devicePixelRatio = window.devicePixelRatio || 1; // > 1 for retina displays
-		var canvas = document.getElementById('main');
-		/* Be sure to update all these values onresize */
-		// Width & height attributes (scaled according to pixel ratio)
-		canvas.width = window.innerWidth * devicePixelRatio;
-		canvas.height = window.innerHeight * devicePixelRatio;
-		// CSS width & height
-		canvas.style.width = window.innerWidth;
-		canvas.style.height = window.innerHeight;
-
+		var canvas = document.getElementById("main");
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
 		$(window).orientationchange();
 	});
 
 	$(window).on("orientationchange", function(event) {
-		//$("#orientation").text("This device is in "+event.orientation);
-		//var c = document.getElementById("main");
-		var devicePixelRatio = window.devicePixelRatio || 1; // > 1 for retina displays
-		var canvas = document.getElementById('main');
-		/* Be sure to update all these values onresize */
-		// Width & height attributes (scaled according to pixel ratio)
-		canvas.width = window.innerWidth * devicePixelRatio;
-		canvas.height = window.innerHeight * devicePixelRatio;
-		// CSS width & height
-		canvas.style.width = window.innerWidth;
-		canvas.style.height = window.innerHeight;
+		
 		if (event.orientation == "portrait")
 		{
 			// Portrait mode //
-
 			redrawLayout(0);
 		}
 		else
@@ -63,8 +44,8 @@
 
 	function redrawLayout(orient)
 	{
-		var c = document.getElementById("main");
-		var context = c.getContext("2d");
+		var canvas = document.getElementById("main");
+		var context = canvas.getContext("2d");
 
 		context.fillStyle = "#ECEBB9";
 		context.fillRect(0, 0, window.innerWidth, window.innerHeight);
