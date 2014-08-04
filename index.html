@@ -17,20 +17,18 @@
 <body>
 	<script>
 	$(document).ready(function() {
-		initDate();
+		//initDate();
 		$(window).resize();
 		$(window).orientationchange();
 	});
 
-	function initDate()
+	function getDate()
 	{
 		var currentDate = new Date();
 		var month = currentDate.getMonth() + 1;
 		var day = currentDate.getDay(); // 0=SUN, 1=MON,...
 
-		var col = "#day" + day;
-		//alert(col);
-		$(col).hide();
+		return day;
 	}
 
 	$(window).on("resize", function(event) {
@@ -104,6 +102,14 @@
       	// Horizontal lines //
     	context.lineWidth = 0.25;
     	context.strokeStyle = "#000000";
+    	for (l = 0; l < 12; l++)
+    	{
+    		context.beginPath();
+    		context.moveTo(40, 25.5 + tileHeight * l);
+    		context.lineTo(window.innerWidth - 5, 25 + tileHeight * l);
+    		context.stroke();
+    	}
+    	/*
     	context.moveTo(40, 25); context.lineTo(window.innerWidth - 5, 25); context.stroke();
     	context.moveTo(40, 25.0 + tileHeight); context.lineTo(window.innerWidth - 5, 25 + tileHeight); context.stroke();
     	context.moveTo(40, 25 + tileHeight*2); context.lineTo(window.innerWidth - 5, 25 + tileHeight*2); context.stroke();
@@ -116,13 +122,31 @@
     	context.moveTo(40, 25 + tileHeight*9); context.lineTo(window.innerWidth - 5, 25 + tileHeight*9); context.stroke();
     	context.moveTo(40, 25 + tileHeight*10); context.lineTo(window.innerWidth - 5, 25 + tileHeight*10); context.stroke();
     	context.moveTo(40, 25 + tileHeight*11); context.lineTo(window.innerWidth - 5, 25 + tileHeight*11); context.stroke();
+    	*/
 
     	// Draw schedule boxes //
+    	var classes = [["#FF0000", "#00FF00"], ["#0000FF","#0F0F00"]];
+    	var times   = [[[10.5, 2],[12.5, 2]],[[10.5,1],[16.5,2]]];
+    	//var day = initDate()-1;
+    	
+		var currentDate = new Date();
+		var month = currentDate.getMonth() + 1;
+		var day = currentDate.getDay() - 1; // 0=SUN, 1=MON,...
+		var hours = currentDate.getHours();
+		var minutes = currentDate.getMinutes();
+		var offset = currentDate.getTimezoneOffset();
+
     	if (orient == 0) // Portrait //
     	{
     		var boxWidth = (window.innerWidth - 10 - 30 - 10) / 2;
-    		context.fillStyle = "#FF0000";
-    		context.fillRect(40, 25, boxWidth, tileHeight*6);
+    		for (d = day; d < classes.length; d++)
+    		{
+    			for (i = 0; i < classes[d].length; i++)
+    			{
+    				context.fillStyle = classes[d][i];
+    				context.fillRect(40 + (d*boxWidth) + (d*5), 25 + (tileHeight * (times[d][i][0]-8)), boxWidth, (tileHeight * times[d][i][1]));
+    			}
+    		}
     	}
     	else // Landscape //
     	{
@@ -130,6 +154,19 @@
     		context.fillStyle = "#0000FF";
     		context.fillRect(40, 25, boxWidth, tileHeight*6);
     	}
+
+    	// Draw time line //
+    	var hour = (currentDate.getUTCHours() + 10) + (currentDate.getUTCMinutes()/60);
+    	//var hour = 8 + (currentDate.getUTCMinutes()/60);
+    	var hourVert = 25 + (hour - 8) * tileHeight - (tileHeight/2) + 2;
+    	//var hourVert = 200;
+    	context.fillText(hourVert, 150, 100);
+    	context.beginPath();
+    	context.strokeStyle = "#FF0000";
+    	context.lineWidth = 4;
+    	context.moveTo(40, hourVert+0.5);
+    	context.lineTo(window.innerWidth - 5, hourVert+0.5);
+    	context.stroke();
 	}
 	</script>
 
