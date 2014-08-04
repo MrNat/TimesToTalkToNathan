@@ -5,8 +5,8 @@ html, body {
             height: 100%;
             margin: 0px;
             border: 0;
-            overflow: hidden; /*  Disable scrollbars */
-            display: block;  /* No floating content on sides */
+            overflow: hidden; 
+            display: block;
         }
 
         canvas {
@@ -19,74 +19,6 @@ html, body {
     width: 100%;
     height: 100%;
         }
-
-	.title {
-		font-size: x-large;
-		font-family: Helvetica, Arial, sans-serif;
-		color: #030310;
-	}
-
-	.timeRuler {
-		background-color: #919191;
-		width: 30px;
-
-		float: left;
-
-		border: 2px solid #919191;
-		border-radius: 6px;
-		color: #545454;
-	}
-
-	.box {
-		border: 2px solid #989898;
-		border-radius: 15px;
-		height: 100px;
-		width: 100px;
-	}
-
-	ul {
-		list-style-type: none;
-		padding: 0;
-		margin: 0px;
-	}
-
-	ul li {
-		text-align: center;
-		padding-top: 15px;
-		padding-bottom: 15px;
-		padding-left: auto;
-		padding-right: auto;
-
-		margin: auto;
-
-		font-size: medium;
-		font-family: sans-serif;
-	}
-
-	.darker {
-		background-color: #545454;
-		padding-left: 0;
-		padding-right: 0;
-		color: #919191;
-	}
-
-	#wrap {
-		width: 100%;
-
-	}
-
-	#columns {
-		float: right;
-		position: relative;
-
-		background-color: #EAEAEA;
-
-		margin: 10px;
-		padding: 0px;
-
-		height: 100px;
-	}
-
 	
 
 
