@@ -1,13 +1,6 @@
 /* Smartphones, (portrait and landscape) */
 @media screen and (orientation: landscape)
 {
-html, body {
-            margin: 0px;
-            border: 0;
-            overflow: hidden; 
-            display: block;
-        }
-
         canvas {
     position: absolute;
     left: 0;
@@ -21,12 +14,6 @@ html, body {
 
 @media screen and (orientation: portrait)
 {
-html, body {
-            margin: 0px;
-            border: 0;
-            overflow: hidden; 
-            display: block;
-        }
 
         canvas {
     position: absolute;
