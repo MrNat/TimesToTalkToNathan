@@ -87,17 +87,13 @@
       	context.font = "12pt Calibri";
       	context.textAlign = "center";
       	context.fillStyle = "#FFFFFF";
-      	context.fillText("8", 20, 25 + 6 + (tileHeight / 2));
-      	context.fillText("9", 20, 25 + tileHeight + 6 + (tileHeight / 2));
-      	context.fillText("10", 20, 25 + tileHeight*2 + 6 + (tileHeight / 2));
-      	context.fillText("11", 20, 25 + tileHeight*3 + 6 + (tileHeight / 2));
-      	context.fillText("12", 20, 25 + tileHeight*4 + 6 + (tileHeight / 2));
-      	context.fillText("1", 20, 25 + tileHeight*5 + 6 + (tileHeight / 2));
-      	context.fillText("2", 20, 25 + tileHeight*6 + 6 + (tileHeight / 2));
-      	context.fillText("3", 20, 25 + tileHeight*7 + 6 + (tileHeight / 2));
-      	context.fillText("4", 20, 25 + tileHeight*8 + 6 + (tileHeight / 2));
-      	context.fillText("5", 20, 25 + tileHeight*9 + 6 + (tileHeight / 2));
-      	context.fillText("6", 20, 25 + tileHeight*10 + 6 + (tileHeight / 2));
+      	for (t = 0; t < 11; t++)
+      	{
+      		if (t < 5)
+      			context.fillText(8+t, 20, 25.5 + tileHeight*t + 6 + (tileHeight / 2));
+      		else
+      			context.fillText(8+t-12, 20, 25.5 + tileHeight*t + 6 + (tileHeight / 2));
+      	}
 
       	// Horizontal lines //
     	context.lineWidth = 0.25;
@@ -109,58 +105,69 @@
     		context.lineTo(window.innerWidth - 5, 25 + tileHeight * l);
     		context.stroke();
     	}
-    	/*
-    	context.moveTo(40, 25); context.lineTo(window.innerWidth - 5, 25); context.stroke();
-    	context.moveTo(40, 25.0 + tileHeight); context.lineTo(window.innerWidth - 5, 25 + tileHeight); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*2); context.lineTo(window.innerWidth - 5, 25 + tileHeight*2); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*3); context.lineTo(window.innerWidth - 5, 25 + tileHeight*3); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*4); context.lineTo(window.innerWidth - 5, 25 + tileHeight*4); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*5); context.lineTo(window.innerWidth - 5, 25 + tileHeight*5); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*6); context.lineTo(window.innerWidth - 5, 25 + tileHeight*6); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*7); context.lineTo(window.innerWidth - 5, 25 + tileHeight*7); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*8); context.lineTo(window.innerWidth - 5, 25 + tileHeight*8); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*9); context.lineTo(window.innerWidth - 5, 25 + tileHeight*9); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*10); context.lineTo(window.innerWidth - 5, 25 + tileHeight*10); context.stroke();
-    	context.moveTo(40, 25 + tileHeight*11); context.lineTo(window.innerWidth - 5, 25 + tileHeight*11); context.stroke();
-    	*/
 
     	// Draw schedule boxes //
-    	var classes = [["#FF0000", "#00FF00"], ["#0000FF","#0F0F00"]];
-    	var times   = [[[10.5, 2],[12.5, 2]],[[10.5,1],[16.5,2]]];
+    	var classes = [["#FF0000", "#00FF00"],
+    				   ["#0000FF", "#0F0F00"],
+    				   ["#574389", "#120933"],
+    				   ["#234794", "#275929", "#016663"],
+    				   ["#234721", "#194692"]];
+    	var times   = [[[10.5, 2],[12.5, 2]],
+    				   [[10.5, 1],[16.5,2]],
+    				   [[8.5, 2], [11.5, 1]],
+    				   [[8.5, 2], [12.5, 2], [2.5, 1]],
+    				   [[9.5, 2], [4.5, 2]]];
     	//var day = initDate()-1;
     	
 		var currentDate = new Date();
-		var month = currentDate.getMonth() + 1;
-		var day = currentDate.getDay() - 1; // 0=SUN, 1=MON,...
-		var hours = currentDate.getHours();
-		var minutes = currentDate.getMinutes();
-		var offset = currentDate.getTimezoneOffset();
+		//var month = currentDate.getMonth() + 1;
+		var day = currentDate.getDay() - 1; // 0=MON, 1=TUES...
+		//var day = 3;
+		//var hours = currentDate.getHours();
+		//var minutes = currentDate.getMinutes();
+		//var offset = currentDate.getTimezoneOffset();
 
     	if (orient == 0) // Portrait //
     	{
     		var boxWidth = (window.innerWidth - 10 - 30 - 10) / 2;
-    		for (d = day; d < classes.length; d++)
+    		/*
+    		for (d = 0; d < 3; d++)
+    		{
+    			for (i = 0; i < classes[day+d].length; i++)
+    			{
+    				context.fillStyle = classes[day+d][i];
+    				context.fillRect(40 + (d*boxWidth) + (d*5), 25 + (tileHeight * (times[day+d][i][0]-8)), boxWidth, (tileHeight * times[day+d][i][1]));
+    			}
+    		}
+    		*/
+    		for (d = day; d < day+1; d++)
     		{
     			for (i = 0; i < classes[d].length; i++)
     			{
     				context.fillStyle = classes[d][i];
-    				context.fillRect(40 + (d*boxWidth) + (d*5), 25 + (tileHeight * (times[d][i][0]-8)), boxWidth, (tileHeight * times[d][i][1]));
+    				context.fillRect(40 + (d-day)*boxWidth + (d-day)*5, 25 + (tileHeight * (times[d][i][0]-8)), boxWidth, (tileHeight * times[d][i][1]));
     			}
     		}
     	}
     	else // Landscape //
     	{
     		var boxWidth = (window.innerWidth - 10 - 30 - 10) / 5;
-    		context.fillStyle = "#0000FF";
-    		context.fillRect(40, 25, boxWidth, tileHeight*6);
+    		for (d = 0; d < 5; d++)
+    		{
+    			for (i = 0; i < classes[d].length; i++)
+    			{
+    				context.fillStyle = classes[d][i];
+    				context.fillRect(40 + (d-day)*boxWidth + (d-day)*5, 25 + (tileHeight * (times[d][i][0]-8)), boxWidth, (tileHeight * times[d][i][1]));
+    			}
+    		}
     	}
 
     	// Draw time line //
     	var hour = (currentDate.getUTCHours() + 10) + (currentDate.getUTCMinutes()/60);
-    	//var hour = 8 + (currentDate.getUTCMinutes()/60);
-    	var hourVert = 25 + (hour - 8) * tileHeight - (tileHeight/2) + 2;
+    	//var hour = 16;
+    	var hourVert = 25 + ((hour - 8) * tileHeight);
     	//var hourVert = 200;
-    	context.fillText(hourVert, 150, 100);
+    	//context.fillText(hourVert, 150, 100);
     	context.beginPath();
     	context.strokeStyle = "#FF0000";
     	context.lineWidth = 4;
@@ -172,31 +179,6 @@
 
 	<canvas id="schedule" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%"></canvas>
 
-	<!--
-	<div id="wrap">
-	<aside class="timeRuler" id="time">
-		<ul>
-			<li>7</li>
-			<li class="darker">8</li>
-			<li>9</li>
-			<li class="darker">10</li>
-			<li>11</li>
-			<li class="darker">12</li>
-			<li>1</li>
-			<li class="darker">2</li>
-			<li>3</li>
-			<li class="darker">4</li>
-			<li>5</li>
-			<li class="darker">6</li>
-		</ul>
-	</aside>
-
-	<div id="columns">
-		<div class="col">1</div>
-		<div class="col">2</div>
-	</div>
-	</div>
-	-->
 </body>
 
 </html>
