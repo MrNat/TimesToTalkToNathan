@@ -17,7 +17,7 @@
 	<script>
 	$(document).ready(function() {
 		//initDate();
-		$(window).resize();
+		$(window).orientationchange();
 	});
 
 	$(window).on("resize", function(event) {
@@ -36,12 +36,11 @@
     	height: devicePixelRatio * window.innerHeight / 10
 		};
 
-		$(window).orientationchange();
 	});
 
 	$(window).on("orientationchange", function(event) {
 		//$("#orientation").text("This device is in "+event.orientation);
-		
+		$(window).resize();
 		var c = document.getElementById("main");
 		
 		if (event.orientation == "portrait")
