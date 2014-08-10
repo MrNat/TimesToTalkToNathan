@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width; 
-    initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    initial-scale=1; maximum-scale=1; user-scalable=0;"/>
 
 	<title>Times to Talk to Nathan</title>
 	
@@ -199,9 +199,9 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
             context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
 
             // Label
-            context.font = "16pt Calibri";
+            context.font = (height/4) + "pt Calibri";
             context.fillStyle = "#000000";
-             wrapText(context, classes[0][k], x + (width / 2), y + (height / 2) + 6, width - 10, 20);
+             wrapText(context, classes[0][k], x + (width / 2), y + (height / 2), width - 10, (height / 4)+3);
            }
         }
         else
@@ -226,9 +226,9 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
             context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
 
             // Label
-            context.font = "16pt Calibri";
+            context.font = (height/4) + "pt Calibri";
             context.fillStyle = "#000000";
-             wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2) + 6, width - 10, 20);
+             wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2), width - 10, (height / 4)+3);
     			 }
     		  }
         }
@@ -255,9 +255,9 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
             context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
 
             // Label
-            context.font = "16pt Calibri";
+            context.font = (height/4) + "pt Calibri";
             context.fillStyle = "#000000";
-            wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2) + 6, width - 10, 20);
+            wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2), width - 10, (height / 4)+3);
     			}
     		}
     	}
