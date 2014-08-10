@@ -256,9 +256,9 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
             context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
 
             // Label
-            context.font = fontSize + "pt Calibri";
+            context.font = fontSize/2 + "pt Calibri";
             context.fillStyle = "#000000";
-            wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2), width - 10, fontSize+2);
+            wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2), width - 10, fontSize/2+2);
     			}
     		}
     	}
