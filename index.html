@@ -3,8 +3,9 @@
 
 <head>
 	<meta charset="UTF-8">
-<meta name="viewport" content="
-    initial-scale=1; maximum-scale=1; user-scalable=0;"/>
+	<meta name="viewport" content="width=device-width; 
+    initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
 	<title>Times to Talk to Nathan</title>
 	
 
@@ -44,6 +45,26 @@
 		}
 
 	});
+
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        }
+        context.fillText(line, x, y);
+      }
 
 	function redrawLayout(orient)
 	{
@@ -119,11 +140,23 @@
     	}
 
     	// Draw schedule boxes //
-    	var classes = [["#3FB8AF", "#7FC7AF"],
-    				   ["#FF3D7F", "#FF9E9D"],
-    				   ["#7FC7AF", "#3FB8AF"],
-    				   ["#FF9E9D", "#FF3D7F", "#FF9E9D"],
-    				   ["#3FB8AF", "#7FC7AF"]];
+      var colors = [["#3FB8AF", "#1693A5"], // Dark blue 
+                    ["#7FC7AF", "#21AABD"], // Light blue
+                    ["#FF3D7F", "#AD234B"], // Dark pink
+                    ["#FF9E9D", "#ED146F"]]; // light pink
+
+    	var classes = [["Programming Lecture", "Matlab Workshop"],
+    				   ["AUS: Global Context", "Calculus Lecture"],
+    				   ["Programming Lab", "Philosophy Lecture"],
+    				   ["Global Experience", "Calculus Lecture", "Calculus Lab"],
+    				   ["Philosophy Tutorial", "AUS: Global Context"]];
+
+      var link = [[1, 2],
+                  [3, 4],
+                  [2, 1],
+                  [4, 3, 4],
+                  [1, 2]];
+
     	var times   = [[[10.5, 2],[12.5, 2]],
     				   [[10.5, 1],[16.5,2]],
     				   [[8.5, 2], [11.5, 1]],
@@ -138,18 +171,67 @@
 		//var hours = currentDate.getHours();
 		//var minutes = currentDate.getMinutes();
 		//var offset = currentDate.getTimezoneOffset();
-
+    var lineWidth = 3;
     	if (orient == 0) // Portrait //
     	{
     		var boxWidth = (window.innerWidth - 10 - 30 - 10) / 2;
+        if (day == 6)
+        {
+            // Weekend //
+            
+        }
+        else if (day == -1)
+        {
+           // For Sunday, only display monday //
+           for (k = 0; k < classes[0].length; k++) {
+            var x = 40 + (1)*boxWidth + (1)*5;
+            var y = header + (tileHeight * (times[0][k][0]-8));
+            var width = boxWidth;
+            var height = (tileHeight * times[0][k][1]);
+           context.fillStyle = colors[link[0][k]-1][0];//classes[d][i];
+            context.fillRect(x, y, width, height);
+
+
+            context.strokeStyle = colors[link[0][k]-1][1];
+            context.lineWidth = lineWidth;
+            context.strokeRect(x, y, width, height);
+            context.lineWidth = lineWidth - 1;
+            context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
+
+            // Label
+            context.font = "16pt Calibri";
+            context.fillStyle = "#000000";
+             wrapText(context, classes[0][k], x + (width / 2), y + (height / 2) + 6, width - 10, 20);
+           }
+        }
+        else
+        {
     		for (d = day; d < day+2; d++)
     		{
     			for (i = 0; i < classes[d].length; i++)
     			{
-    				context.fillStyle = classes[d][i];
-    				context.fillRect(40 + (d-day)*boxWidth + (d-day)*5, header + (tileHeight * (times[d][i][0]-8)), boxWidth, (tileHeight * times[d][i][1]));
-    			}
-    		}
+            var x = 40 + (d-day)*boxWidth + (d-day)*5;
+            var y = header + (tileHeight * (times[d][i][0]-8));
+            var width = boxWidth;
+            var height = (tileHeight * times[d][i][1]);
+
+    				context.fillStyle = colors[link[d][i]-1][0];//classes[d][i];
+    				context.fillRect(x, y, width, height);
+
+
+            context.strokeStyle = colors[link[d][cl]-1][1];
+            context.lineWidth = lineWidth;
+            context.strokeRect(x, y, width, height);
+            context.lineWidth = lineWidth - 1;
+            context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
+
+            // Label
+            context.font = "16pt Calibri";
+            context.fillStyle = "#000000";
+             wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2) + 6, width - 10, 20);
+    			 }
+    		  }
+        }
     	}
     	else // Landscape //
     	{
@@ -158,8 +240,24 @@
     		{
     			for (cl = 0; cl < classes[d].length; cl++)
     			{
-    				context.fillStyle = classes[d][cl];
-    				context.fillRect(40 + (d)*boxWidth + (d)*5, header + (tileHeight * (times[d][cl][0]-8)), boxWidth, (tileHeight * times[d][cl][1]));
+            var x = 40 + (d)*boxWidth + (d)*5;
+            var y = header + (tileHeight * (times[d][cl][0]-8));
+            var width = boxWidth;
+            var height = (tileHeight * times[d][cl][1]);
+
+    				context.fillStyle = colors[link[d][cl]-1][0];// classes[d][cl];
+    				context.fillRect(x, y, width, height);;
+
+            context.strokeStyle = colors[link[d][cl]-1][1];
+            context.lineWidth = lineWidth;
+            context.strokeRect(x, y, width, height);
+            context.lineWidth = lineWidth - 1;
+            context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
+
+            // Label
+            context.font = "16pt Calibri";
+            context.fillStyle = "#000000";
+            wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2) + 6, width - 10, 20);
     			}
     		}
     	}
@@ -169,7 +267,7 @@
     	//var hour = 16;
     	var hourVert = header + ((hour - 8) * tileHeight);
     	//var hourVert = 200;
-    	context.fillText(window.innerHeight, 150, 100);
+    	//context.fillText(window.innerHeight, 150, 100);
     	context.beginPath();
     	context.strokeStyle = "#FF0000";
     	context.lineWidth = 4;
