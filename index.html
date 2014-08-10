@@ -172,6 +172,7 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
 		//var minutes = currentDate.getMinutes();
 		//var offset = currentDate.getTimezoneOffset();
     var lineWidth = 3;
+    var fontSize = (width / 10);
     	if (orient == 0) // Portrait //
     	{
     		var boxWidth = (window.innerWidth - 10 - 30 - 10) / 2;
@@ -199,9 +200,9 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
             context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
 
             // Label
-            context.font = (height/4) + "pt Calibri";
+            context.font = fontSize + "pt Calibri";
             context.fillStyle = "#000000";
-             wrapText(context, classes[0][k], x + (width / 2), y + (height / 2), width - 10, (height / 4)+3);
+             wrapText(context, classes[0][k], x + (width / 2), y + (height / 2) + fontSize/2, width - 10, fontSize+2);
            }
         }
         else
@@ -226,9 +227,9 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
             context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
 
             // Label
-            context.font = (height/4) + "pt Calibri";
+            context.font = fontSize + "pt Calibri";
             context.fillStyle = "#000000";
-             wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2), width - 10, (height / 4)+3);
+             wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2)+fontSize/2, width - 10, fontSize+2);
     			 }
     		  }
         }
@@ -255,9 +256,9 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
             context.strokeRect(x+(lineWidth+1), y+(lineWidth+1), width - ((lineWidth+1) * 2), height - ((lineWidth+1) * 2));
 
             // Label
-            context.font = (height/4) + "pt Calibri";
+            context.font = fontSize + "pt Calibri";
             context.fillStyle = "#000000";
-            wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2), width - 10, (height / 4)+3);
+            wrapText(context, classes[d][cl], x + (width / 2), y + (height / 2), width - 10, fontSize+2);
     			}
     		}
     	}
